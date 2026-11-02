@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="cloudGrad" x1="8" y1="12" x2="56" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00D2FF" />
+      <stop offset="100%" stop-color="#3A7BD5" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#0A1124" />
+  <path d="M47.2 32.8C46.8 26.2 41.3 21 34.5 21C29.6 21 25.3 23.7 23.2 27.8C22.2 27.4 21.1 27.2 20 27.2C15.6 27.2 12 30.8 12 35.2C12 39.6 15.6 43.2 20 43.2H46.5C49.5 43.2 52 40.7 52 37.7C52 35.1 50 33.1 47.2 32.8Z" fill="url(#cloudGrad)" filter="url(#glow)" />
+  <circle cx="28" cy="35" r="2" fill="#FFFFFF" />
+  <circle cx="36" cy="35" r="2" fill="#FFFFFF" />
+  <circle cx="44" cy="35" r="2" fill="#FFFFFF" />
+</svg>

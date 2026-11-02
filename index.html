@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloudmini.net - Hệ Thống Đang Bảo Trì & Nâng Cấp Hạ Tầng</title>
+  
+  <!-- SEO & Social Meta Tags -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Hệ thống Cloudmini.net đang được nâng cấp hạ tầng định kỳ để tối ưu hiệu năng. Toàn bộ dịch vụ VPS và Proxy vẫn hoạt động bình thường.">
+  <meta property="og:title" content="Cloudmini.net - Bảo Trì & Nâng Cấp Hệ Thống">
+  <meta property="og:description" content="Chúng tôi đang nâng cấp hạ tầng máy chủ và hệ thống mạng. VPS & Proxy của quý khách vẫn hoạt động ổn định.">
+  <meta property="og:image" content="assets/logo-white.png">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #070B19;
+      --bg-card: rgba(15, 23, 42, 0.72);
+      --bg-card-hover: rgba(22, 34, 62, 0.85);
+      --border-card: rgba(56, 189, 248, 0.16);
+      --border-card-hover: rgba(56, 189, 248, 0.38);
+      --primary: #38bdf8;
+      --primary-glow: rgba(56, 189, 248, 0.4);
+      --accent-blue: #2563eb;
+      --accent-cyan: #06b6d4;
+      --accent-green: #10b981;
+      --accent-amber: #f59e0b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-subtle: #64748b;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Background Cyber Canvas & Ambient Lights */
+    #particle-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .ambient-glow {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .glow-1 {
+      top: -10%;
+      left: 15%;
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, #1d4ed8, transparent 70%);
+      animation: floatGlow 12s ease-in-out infinite alternate;
+    }
+    .glow-2 {
+      bottom: -10%;
+      right: 15%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, #0284c7, transparent 70%);
+      animation: floatGlow 15s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes floatGlow {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, -30px) scale(1.15); }
+    }
+
+    /* Container */
+    .container {
+      position: relative;
+      z-index: 10;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      flex-wrap: wrap;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+
+    .brand-logo-img {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 8px rgba(56, 189, 248, 0.3));
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .brand-name span {
+      color: var(--primary);
+    }
+
+    .brand-tagline {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: #fbbf24;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 600;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.15);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #fbbf24;
+      box-shadow: 0 0 10px #fbbf24;
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    /* Main Content */
+    main {
+      padding: 44px 0 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .headline-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      color: var(--primary);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(28px, 5.2vw, 48px);
+      font-weight: 800;
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      max-width: 820px;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, #ffffff 30%, #cbd5e1 70%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .lead-desc {
+      font-size: clamp(15px, 2.2vw, 17px);
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 660px;
+      margin-bottom: 34px;
+    }
+
+    /* Uptime Assurance Banner (Crucial for Cloud Providers) */
+    .assurance-box {
+      width: 100%;
+      max-width: 780px;
+      background: linear-gradient(90deg, rgba(16, 185, 129, 0.12), rgba(6, 182, 212, 0.1));
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: 14px;
+      padding: 16px 22px;
+      margin-bottom: 36px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-align: left;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .assurance-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      background: rgba(16, 185, 129, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #34d399;
+    }
+
+    .assurance-text strong {
+      display: block;
+      color: #a7f3d0;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .assurance-text p {
+      color: #e2e8f0;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    /* Countdown Section */
+    .countdown-card {
+      width: 100%;
+      max-width: 780px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 20px;
+      padding: 28px 24px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      margin-bottom: 36px;
+    }
+
+    .countdown-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .countdown-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .countdown-clock {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .time-box {
+      background: rgba(10, 16, 32, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 16px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .time-box::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    }
+
+    .time-num {
+      font-family: var(--font-mono);
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .time-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Progress bar */
+    .progress-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .progress-bar-bg {
+      height: 9px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      width: 82%;
+      height: 100%;
+      background: linear-gradient(90deg, #2563eb, var(--primary), #38bdf8);
+      border-radius: 999px;
+      position: relative;
+      transition: width 1s ease-in-out;
+      box-shadow: 0 0 14px var(--primary-glow);
+    }
+
+    .progress-bar-fill::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+      animation: progressGlow 2.2s infinite;
+    }
+
+    @keyframes progressGlow {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* Maintenance Checklist */
+    .maintenance-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .step-item.done {
+      color: #cbd5e1;
+    }
+
+    .step-item.active {
+      color: #ffffff;
+      border-color: rgba(56, 189, 248, 0.35);
+      background: rgba(56, 189, 248, 0.06);
+    }
+
+    .step-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .step-item.done .step-icon {
+      background: #10b981;
+      color: #042f2e;
+    }
+
+    .step-item.active .step-icon {
+      background: var(--primary);
+      color: #082f49;
+      box-shadow: 0 0 8px var(--primary);
+    }
+
+    .step-item.pending .step-icon {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-subtle);
+    }
+
+    /* Node & Server Status Grid */
+    .status-grid {
+      width: 100%;
+      max-width: 780px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+
+    .node-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 14px 16px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: all 0.25s ease;
+    }
+
+    .node-card:hover {
+      border-color: var(--border-card-hover);
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+    }
+
+    .node-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .node-name {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .node-status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .dot-green {
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+    }
+
+    .dot-amber {
+      background: #f59e0b;
+      box-shadow: 0 0 8px #f59e0b;
+    }
+
+    .node-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Action Buttons & Contact Channels */
+    .action-group {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      width: 100%;
+      max-width: 780px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+
+    .btn-telegram {
+      background: linear-gradient(135deg, #0088cc 0%, #29b6f6 100%);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 24px rgba(0, 136, 204, 0.35);
+    }
+
+    .btn-telegram:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(0, 136, 204, 0.5);
+      color: #ffffff;
+    }
+
+    .btn-portal {
+      background: rgba(255, 255, 255, 0.06);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-portal:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.35);
+      transform: translateY(-2px);
+      color: #ffffff;
+    }
+
+    .btn-ping {
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .btn-ping:hover {
+      background: rgba(56, 189, 248, 0.08);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .btn svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    /* Direct Contact Links */
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 10px;
+    }
+
+    .contact-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+
+    .contact-link:hover {
+      color: var(--primary);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 12.5px;
+      color: var(--text-subtle);
+      flex-wrap: wrap;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-left strong {
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-links a {
+      color: var(--text-subtle);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .container {
+        padding: 24px 16px 36px;
+      }
+      header {
+        justify-content: center;
+        text-align: center;
+      }
+      .brand-wrap {
+        justify-content: center;
+        width: 100%;
+      }
+      .status-badge {
+        margin: 6px auto 0;
+      }
+      .countdown-clock {
+        gap: 8px;
+      }
+      .time-box {
+        padding: 12px 4px;
+      }
+      .time-num {
+        font-size: 26px;
+      }
+      .btn {
+        width: 100%;
+      }
+      footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Light Blurs -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <!-- Interactive Constellation Network Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <div class="container">
+    
+    <!-- Top Header -->
+    <header>
+      <a href="https://cloudmini.net" class="brand-wrap">
+        <img src="assets/logo-white.png" alt="Cloudmini.net Logo" class="brand-logo-img" onerror="this.src='favicon.svg'">
+        <div class="brand-text">
+          <div class="brand-name">Cloudmini<span>.net</span></div>
+          <div class="brand-tagline">VPS & Proxy Infrastructure</div>
+        </div>
+      </a>
+
+      <div class="status-badge">
+        <div class="pulse-dot"></div>
+        <span>Bảo trì nâng cấp hệ thống</span>
+      </div>
+    </header>
+
+    <!-- Main Section -->
+    <main>
+      <div class="headline-pill">
+        <span>⚡ Scheduled Infrastructure Upgrade</span>
+      </div>
+
+      <h1>Hệ Thống Đang Được Nâng Cấp & Bảo Trì Định Kỳ</h1>
+
+      <p class="lead-desc">
+        Cloudmini đang tiến hành nâng cấp cụm máy chủ và tối ưu hóa hệ thống mạng nhằm gia tăng tốc độ, mở rộng băng thông và nâng cao tính bảo mật. Website sẽ sớm hoạt động trở lại.
+      </p>
+
+      <!-- Crucial Uptime Assurance -->
+      <div class="assurance-box">
+        <div class="assurance-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="assurance-text">
+          <strong>Toàn bộ dịch vụ VPS & Proxy vẫn hoạt động 100%</strong>
+          <p>Quá trình bảo trì chỉ áp dụng cho cổng thông tin website chính. Toàn bộ máy chủ VPS (Việt Nam, USA) và cụm Proxy của Quý khách vẫn đang vận hành liên tục, không bị gián đoạn.</p>
+        </div>
+      </div>
+
+      <!-- Live Countdown & Progress Card -->
+      <div class="countdown-card">
+        <div class="countdown-header">
+          <div class="countdown-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <span>Thời gian dự kiến hoàn thành</span>
+          </div>
+          <span style="font-size: 12px; color: var(--text-subtle);" id="target-time-label">Dự kiến hoàn tất trong:</span>
+        </div>
+
+        <div class="countdown-clock">
+          <div class="time-box">
+            <div class="time-num" id="hours">01</div>
+            <div class="time-label">Giờ</div>
+          </div>
+          <div class="time-box">
+            <div class="time-num" id="minutes">45</div>
+            <div class="time-label">Phút</div>
+          </div>
+          <div class="time-box">
+            <div class="time-num" id="seconds">20</div>
+            <div class="time-label">Giây</div>
+          </div>
+          <div class="time-box">
+            <div class="time-num" id="progress-text">85%</div>
+            <div class="time-label">Tiến độ</div>
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-wrap">
+          <div class="progress-meta">
+            <span>Tiến độ nâng cấp hệ thống</span>
+            <span id="percent-label">85% hoàn tất</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progress-fill" style="width: 85%;"></div>
+          </div>
+        </div>
+
+        <!-- Real-time Checklist -->
+        <div class="maintenance-steps">
+          <div class="step-item done">
+            <div class="step-icon">✓</div>
+            <span>Sao lưu dữ liệu định kỳ</span>
+          </div>
+          <div class="step-item done">
+            <div class="step-icon">✓</div>
+            <span>Nâng cấp Core Network & Băng thông</span>
+          </div>
+          <div class="step-item active">
+            <div class="step-icon">⚡</div>
+            <span>Đồng bộ API Client & Cổng Portal</span>
+          </div>
+          <div class="step-item pending">
+            <div class="step-icon">○</div>
+            <span>Kiểm thử bảo mật & Chạy lại</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real-time Node Status Grid -->
+      <div class="status-grid">
+        <div class="node-card">
+          <div class="node-head">
+            <span class="node-name">Cloud VPS VN</span>
+            <span class="node-status-dot dot-green"></span>
+          </div>
+          <span class="node-desc">99.99% Uptime · Bình thường</span>
+        </div>
+        <div class="node-card">
+          <div class="node-head">
+            <span class="node-name">Cloud VPS US</span>
+            <span class="node-status-dot dot-green"></span>
+          </div>
+          <span class="node-desc">100% Uptime · Bình thường</span>
+        </div>
+        <div class="node-card">
+          <div class="node-head">
+            <span class="node-name">Proxy Cluster</span>
+            <span class="node-status-dot dot-green"></span>
+          </div>
+          <span class="node-desc">IPv4 / IPv6 · Hoạt động</span>
+        </div>
+        <div class="node-card">
+          <div class="node-head">
+            <span class="node-name">Web Portal</span>
+            <span class="node-status-dot dot-amber"></span>
+          </div>
+          <span class="node-desc">Đang bảo trì cập nhật</span>
+        </div>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div class="action-group">
+        <a href="https://t.me/cloudminisupport" target="_blank" rel="noopener" class="btn btn-telegram">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+          </svg>
+          <span>Hỗ Trợ Kỹ Thuật (Telegram 24/7)</span>
+        </a>
+
+        <a href="https://client.cloudmini.net" target="_blank" rel="noopener" class="btn btn-portal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+            <line x1="9" y1="3" x2="9" y2="21"/>
+          </svg>
+          <span>Đăng Nhập Client Panel</span>
+        </a>
+
+        <button onclick="checkSiteStatus()" class="btn btn-ping" id="btn-refresh">
+          <svg id="refresh-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"/>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+          </svg>
+          <span id="btn-refresh-text">Kiểm Tra Trạng Thái</span>
+        </button>
+      </div>
+
+      <!-- Support Contacts -->
+      <div class="contact-row">
+        <a href="mailto:support@cloudmini.net" class="contact-link">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span>support@cloudmini.net</span>
+        </a>
+        <span>•</span>
+        <a href="https://www.facebook.com/cloudminidotnet/" target="_blank" rel="noopener" class="contact-link">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          <span>Fanpage Facebook</span>
+        </a>
+        <span>•</span>
+        <span style="color: var(--text-subtle);">Hotline/Zalo hỗ trợ qua Telegram</span>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-left">
+        <span>© 2026 <strong>Cloudmini.net</strong></span>
+        <span>— Hạ tầng Cloud VPS & Proxy tốc độ cao.</span>
+      </div>
+      <div class="footer-links">
+        <a href="https://client.cloudmini.net">Client Area</a>
+        <a href="https://t.me/cloudminisupport" target="_blank" rel="noopener">Telegram Support</a>
+        <a href="mailto:support@cloudmini.net">Liên hệ</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Interactive JavaScript -->
+  <script>
+    // 1. Constellation Network Canvas Animation
+    (function initCanvas() {
+      const canvas = document.getElementById('particle-canvas');
+      const ctx = canvas.getContext('2d');
+      let width, height;
+      let particles = [];
+      const particleCount = 45;
+      const maxDistance = 120;
+
+      function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      class Particle {
+        constructor() {
+          this.x = Math.random() * width;
+          this.y = Math.random() * height;
+          this.vx = (Math.random() - 0.5) * 0.45;
+          this.vy = (Math.random() - 0.5) * 0.45;
+          this.radius = Math.random() * 1.6 + 0.8;
+        }
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          if (this.x < 0 || this.x > width) this.vx *= -1;
+          if (this.y < 0 || this.y > height) this.vy *= -1;
+        }
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(56, 189, 248, 0.45)';
+          ctx.fill();
+        }
+      }
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+        // Draw connecting lines
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < maxDistance) {
+              const alpha = (1 - dist / maxDistance) * 0.16;
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.strokeStyle = `rgba(56, 189, 248, ${alpha})`;
+              ctx.lineWidth = 0.8;
+              ctx.stroke();
+            }
+          }
+        }
+
+        particles.forEach(p => {
+          p.update();
+          p.draw();
+        });
+
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+
+    // 2. Countdown Timer Logic
+    // Sets a 2-hour target from session or maintains smooth countdown
+    let targetTime;
+    const STORAGE_KEY = 'cloudmini_maint_target';
+    const storedTarget = localStorage.getItem(STORAGE_KEY);
+
+    if (storedTarget && Number(storedTarget) > Date.now()) {
+      targetTime = Number(storedTarget);
+    } else {
+      // Default: 2 hours from now
+      targetTime = Date.now() + (2 * 60 * 60 * 1000) + (15 * 60 * 1000);
+      localStorage.setItem(STORAGE_KEY, targetTime.toString());
+    }
+
+    function updateCountdown() {
+      const now = Date.now();
+      const diff = Math.max(0, targetTime - now);
+
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+      if (diff === 0) {
+        document.getElementById('target-time-label').textContent = 'Hệ thống chuẩn bị mở lại...';
+      }
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // 3. Ping / Refresh Status Checker
+    function checkSiteStatus() {
+      const btn = document.getElementById('btn-refresh');
+      const icon = document.getElementById('refresh-icon');
+      const text = document.getElementById('btn-refresh-text');
+
+      icon.style.animation = 'spin 1s linear infinite';
+      text.textContent = 'Đang kiểm tra...';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        icon.style.animation = '';
+        text.textContent = 'Hệ thống đang bảo trì';
+        btn.disabled = false;
+        setTimeout(() => {
+          text.textContent = 'Kiểm Tra Trạng Thái';
+        }, 3000);
+      }, 1200);
+    }
+
+    // Keyframe for button spinner
+    const styleSheet = document.createElement('style');
+    styleSheet.innerHTML = `
+      @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+    `;
+    document.head.appendChild(styleSheet);
+  </script>
+</body>
+</html>
